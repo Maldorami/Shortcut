@@ -17,17 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/homeFreelancer', 'HomeFreelancer@index')->name('homeFreelancer');
 Route::get('/homeCompany', 'HomeCompany@index')->name('homeCompany');
 
+Route::get('/freelancersLogout', 'FreelancerController@logout')->name('freelancersLogout');
 Route::get('/freelancersRegister', 'FreelancerController@showRegisterForm')->name('freelancersRegister');
 Route::post('/freelancersRegister', 'FreelancerController@registrarFreelancer');
 Route::get('/freelancersLogin', 'FreelancerController@showLoginForm')->name('freelancersLogin');
 Route::post('/freelancersLogin', 'FreelancerController@loginFreelancer');
 
+Route::get('/companiesLogout', 'CompanyController@logout')->name('companiesLogout');
 Route::get('/companiesRegister', 'CompanyController@showRegisterForm')->name('companiesRegister');
 Route::post('/companiesRegister', 'CompanyController@registrarCompany');
 Route::get('/companiesLogin', 'CompanyController@showLoginForm')->name('companiesLogin');
 Route::post('/companiesLogin', 'CompanyController@loginCompany');
+
+Route::get('/faq', 'FAQController@index')->name('faq');
 

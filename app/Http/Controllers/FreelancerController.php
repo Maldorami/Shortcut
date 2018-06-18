@@ -12,6 +12,24 @@ use Auth;
 
 class FreelancerController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('guest:freelancer')->except('logout');
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        Auth::guard('freelancer')->logout();
+        return redirect()->route('freelancersLogin');
+    }
+
     public function showRegisterForm()
     {
         return view('FreelancerRegister');
@@ -24,11 +42,11 @@ class FreelancerController extends Controller
         $data['avatar'] = $this->UploadAvtar();
         $data['password'] = Hash::make($data['password']);       
         Freelancer::create($data);
-        return redirect('/')->with('Status', 'Te has registrado como Freelancer!');
+        return redirect()->route('freelancersLogin')->with('Status', 'Te has registrado como Freelancer!');
     }
 
     public function showLoginForm()
-    {
+    {        
         return view('FreelancerLogin');
     }
 
@@ -36,7 +54,7 @@ class FreelancerController extends Controller
     {   
        $this->validateLogin($request);
 
-       if(Auth::guard('freelancer')->attempt(['email' => $request->email, 'password' => $request->password]))
+       if(Auth::guard('freelancer')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember))
         {
             return redirect('/homeFreelancer')->with('Status', 'You are logged!');
         }

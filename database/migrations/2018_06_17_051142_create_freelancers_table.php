@@ -22,6 +22,7 @@ class CreateFreelancersTable extends Migration
         $table->string('genre');        
         $table->date('birthdate','d-m-Y');
         $table->string('avatar');
+        $table->rememberToken();
         $table->timestamps();
     });
     }

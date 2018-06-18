@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Auth;
-
 class HomeFreelancer extends Controller
 {
     /**
@@ -16,7 +13,6 @@ class HomeFreelancer extends Controller
     {
         $this->middleware('auth:freelancer');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -24,6 +20,8 @@ class HomeFreelancer extends Controller
      */
     public function index()
     {
-        return view('homeFreelancer')->with('user', json_decode(Auth::guard('freelancer')->user(), true));
+        if(Auth::guard('freelancer')->check()){
+            return view('homeFreelancer')->with('user', json_decode(Auth::guard('freelancer')->user(), true));
+        }
     }
 }

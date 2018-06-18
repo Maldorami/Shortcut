@@ -5,9 +5,9 @@
 
     <form class="forml-horizontal" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
-        <fieldset>
-            <legend>Página de registro de Freelancers</legend>
-
+        <fieldset class="card">
+            <div class="card-header">Página de registro para Freelancers</div>
+            <div class="card-body">
             <div class="form-group">
               <label for="InputEmail">Email</label>
               <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Ingrese su email" name="email" value="{{old('email')}}">
@@ -62,6 +62,7 @@
     @endif
 
     <button type="submit" class="btn btn-primary" value="Upload">Registrarse</button>
+  </div>
 </fieldset>
 </form>
 </div>

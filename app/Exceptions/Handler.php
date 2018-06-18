@@ -34,6 +34,28 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        //NEW STUFF HERE
+        if($exception instanceof AuthenticationException){
+            $guard = array_get($exception->guards(),0);
+
+            switch($guard){
+                case 'freelancer':
+                    $login = 'freelancersLogin';
+                break;
+
+                case 'company':
+                    $login = 'companiesLogin';
+                break;
+
+                default:
+                    $login = 'login';
+                break;
+            }
+
+            return redirect()->guest(route($login));
+
+        };
+
         parent::report($exception);
     }
 
@@ -48,4 +70,6 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+
+
 }

@@ -1,3 +1,6 @@
+<script>window.location = '/freelancersRegister';</script>
+
+
 @extends('layouts.app')
 
 @section('content')

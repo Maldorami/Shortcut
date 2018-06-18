@@ -12,6 +12,23 @@ use Auth;
 
 class CompanyController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('guest:company')->except('logout');
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function logout()
+    {
+        Auth::guard('company')->logout();
+        return redirect()->route('companiesLogin');
+    }
+
 	public function showRegisterForm()
 	{
 		return view('CompanyRegister');
@@ -24,11 +41,12 @@ class CompanyController extends Controller
 		$data['avatar'] = $this->UploadAvtar();
 		$data['password'] = Hash::make($data['password']);       
 		Company::create($data);
-		return redirect('/')->with('Status', 'Te has registrado como Company!');
+		return redirect()->route('companiesLogin')->with('Status', 'Te has registrado como Company!');
 	}
 
 	public function showLoginForm()
 	{
+        $this->middleware('guest:company');
 		return view('CompanyLogin');
 	}
 
@@ -36,7 +54,7 @@ class CompanyController extends Controller
 	{
 		$this->validateLogin($request);
 
-		if(Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password])){
+		if(Auth::guard('company')->attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
 			return redirect('/homeCompany');
 		}
 

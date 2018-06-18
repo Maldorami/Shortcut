@@ -1,10 +1,7 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Auth;
-
 class HomeCompany extends Controller
 {
     /**
@@ -16,7 +13,6 @@ class HomeCompany extends Controller
     {
         $this->middleware('auth:company');
     }
-
     /**
      * Show the application dashboard.
      *
@@ -24,6 +20,8 @@ class HomeCompany extends Controller
      */
     public function index()
     {
-        return view('homeCompany')->with('user', json_decode(Auth::guard('company')->user(), true));
+        if(Auth::guard('company')->check()){
+            return view('homeCompany')->with('user', json_decode(Auth::guard('company')->user(), true));
+        }
     }
 }
