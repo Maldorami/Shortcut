@@ -31,6 +31,10 @@ Route::get('/companiesRegister', 'CompanyController@showRegisterForm')->name('co
 Route::post('/companiesRegister', 'CompanyController@registrarCompany');
 Route::get('/companiesLogin', 'CompanyController@showLoginForm')->name('companiesLogin');
 Route::post('/companiesLogin', 'CompanyController@loginCompany');
+Route::get('/companiesProyects', 'CompanyController@showProyects')->name('companiesProyects');
 
 Route::get('/faq', 'FAQController@index')->name('faq');
 
+
+Route::get('/createProyect', 'ProyectController@showCreateForm')->name('createProyect');
+Route::post('/createProyect', 'ProyectController@createPoryect');

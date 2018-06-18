@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header">Perfil</div>
                 <div class="card-body">
+                    <p><strong>ID:</strong> {{$user['id']}}</p>
                     <p><strong>Nombre:</strong> {{$user['first_name']}}</p>
                     <p><strong>Apellido:</strong> {{$user['last_name']}}</p>
                     <p><strong>Email:</strong> {{$user['email']}}</p>
@@ -21,6 +22,5 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection

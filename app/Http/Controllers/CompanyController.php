@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Auth;
+use App\Proyect;
 
 class CompanyController extends Controller
 {
 	public function __construct()
     {
-        $this->middleware('guest:company')->except('logout');
+        $this->middleware('guest:company')->except('logout', 'showProyects');
     }
 
     /**
@@ -59,6 +60,18 @@ class CompanyController extends Controller
 		}
 
 		return redirect('/companiesLogin')->with('LogError', 'Usuario o contraseña incorrecta');
+	}
+
+	public function showProyects()
+	{
+		$proyects = [];
+
+		if(Auth::guard('company')->user())
+		{
+			$proyects = Proyect::all()->where('company_id' , '=', Auth::guard('company')->user()->id);
+		}
+
+		return view('proyects')->with('proyects', $proyects);
 	}
 
 	public function validation(Request $request)

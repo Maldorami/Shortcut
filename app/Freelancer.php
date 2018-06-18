@@ -28,4 +28,9 @@ class Freelancer extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function proyects()
+    {
+        return $this->belongsToMany(Proyect::class);
+    }
 }
