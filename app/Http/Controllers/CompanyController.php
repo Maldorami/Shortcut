@@ -62,18 +62,6 @@ class CompanyController extends Controller
 		return redirect('/companiesLogin')->with('LogError', 'Usuario o contraseña incorrecta');
 	}
 
-	public function showProyects()
-	{
-		$proyects = [];
-
-		if(Auth::guard('company')->user())
-		{
-			$proyects = Proyect::all()->where('company_id' , '=', Auth::guard('company')->user()->id);
-		}
-
-		return view('proyects')->with('proyects', $proyects);
-	}
-
 	public function validation(Request $request)
 	{
 		return $this->validate($request, [

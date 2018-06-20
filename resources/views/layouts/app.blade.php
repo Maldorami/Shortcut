@@ -37,6 +37,19 @@
             <li class="nav-link">
               <a href="{{route('faq')}}" class="nav-link">FAQ</a>
             </li>
+
+            @if(Auth::guard('company')->check())
+              <li class="nav-link">
+                <a href="{{route('createProyect')}}" class="nav-link">Crear Proyecto</a>
+              </li>
+            @elseif(Auth::guard('freelancer')->check())
+              <li class="nav-link">
+                <a href="{{route('showAllProyects')}}" class="nav-link">Buscar Proyecto</a>
+              </li>
+
+            @endif
+
+
           </ul>
 
           <!-- Right Side Of Navbar -->
@@ -70,15 +83,17 @@
               </a>
               <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 40px, 0px); top: 0px; left: 0px; will-change: transform;">
                 @if(Auth::guard('company')->check())
-                  <a class="dropdown-item" href="{{ route('homeCompany') }}">Home</a>
+                  <a class="dropdown-item" href="{{ route('homeCompany') }}">Perfil</a>
+                  <a class="dropdown-item" href="{{ route('companiesProyects') }}">Mis proyectos</a>
                 @elseif(Auth::guard('freelancer')->check())
-                  <a class="dropdown-item" href="{{ route('homeFreelancer') }}">Home</a>
+                  <a class="dropdown-item" href="{{ route('homeFreelancer') }}">Perfil</a>
+                  <a class="dropdown-item" href="{{ route('showMyProyects') }}">Proyectos en los que participo</a>
                 @endif                
                 <div class="dropdown-divider"></div>
                 @if(Auth::guard('company')->check())
-                  <a class="dropdown-item" href="{{ route('companiesLogout') }}">Logout</a>
+                  <a class="dropdown-item" href="{{ route('companiesLogout') }}">Cerrar sesión</a>
                 @elseif(Auth::guard('freelancer')->check())
-                <a class="dropdown-item" href="{{ route('freelancersLogout') }}">Logout</a>
+                <a class="dropdown-item" href="{{ route('freelancersLogout') }}">Cerrar sesión</a>
                 @endif   
               </div>
             </li>

@@ -14,7 +14,7 @@
 					<p><strong>ID:</strong> {{$proyect['id']}}</p>
 					<p><strong>Owner ID:</strong> {{$proyect['company_id']}}</p>
 					<p><strong>Descripción:</strong> {{$proyect['description']}}</p>
-					<p><strong>Tamaño del equipo:</strong> {{$proyect['team_size']}}</p> 
+					<p><strong>Tamaño del equipo:</strong> {{ $freelancers[$proyect['id']] != '[]'?$freelancers[$proyect['id']] : 0 }}/{{$proyect['team_size']}}</p> 
 					</div> 
 				</div>
 				@endforeach

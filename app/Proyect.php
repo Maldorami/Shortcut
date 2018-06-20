@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Freelancer; 
 
 class Proyect extends Model
 {
@@ -10,13 +11,13 @@ class Proyect extends Model
         'id', 'title', 'company_id', 'description', 'team_size',
     ];
 
-    public function freelancers()
-    {
-    	return $this->belongsToMany(Freelancer::class);
-    }
-
     public function company()
     {
-    	return $this->hasOne(Company::class, 'company_id', 'companies_id');
+    	return $this->hasOne(Company::class);
+    }
+
+    public function freelancers()
+    {
+        return $this->belongsToMany(Freelancer::class);
     }
 }
