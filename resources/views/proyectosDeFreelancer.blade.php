@@ -13,6 +13,13 @@
 					<p><strong>Título:</strong> {{$proyect['title']}} </p>
 					<p><strong>Descripción:</strong> {{ $proyect['description'] }}</p>
 					<p><strong>Tamaño del equipo:</strong> {{ count($freelancers[$proyect['id']]) }}/{{$proyect['team_size']}}</p>
+
+					<form method="post">
+						{{csrf_field()}}
+						<input type="hidden" name="proyect_id" value="{{ $proyect['id'] }}">
+						<input type="hidden" name="freelancer_id" value="{{ Auth::guard('freelancer')->user()->id }}">
+						<button type="submit" class="btn btn-danger">Abandonar</button>
+					</form>
 					</div>
 
 				</div>

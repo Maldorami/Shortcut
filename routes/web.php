@@ -43,3 +43,4 @@ Route::get('/showAllProyects', 'ProyectController@showAllProyects')->name('showA
 Route::post('/showAllProyects', 'ProyectController@joinProyect');
 
 Route::get('/showMyProyects', 'ProyectController@showMyProyects')->name('showMyProyects');
+Route::post('/showMyProyects', 'ProyectController@UnattachProyect');

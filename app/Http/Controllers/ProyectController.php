@@ -56,10 +56,13 @@ class ProyectController extends Controller
 
     public function showAllProyects()
     {
-        $this->middleware('guest:company');
+        $this->middleware('auth:freelancers');
 
         $freelancers = [];
-        $proyects = Proyect::all()->where('freelancer.id', '!=', Auth::guard('freelancer')->user()->id);
+        
+        $proyects = Proyect::all()->filter(function ($value, $key) {
+           return !$value->freelancers->contains(Auth::guard('freelancer')->user()->id) && count($value->freelancers) < $value->team_size;
+       });
 
         if(count($proyects) > 0)
         {
@@ -80,7 +83,12 @@ class ProyectController extends Controller
         $proyect->freelancers()->attach($data['freelancer_id']);
 
         $freelancers = [];
-        $proyects = Proyect::all()->where('freelancer.id', '!=', Auth::guard('freelancer')->user()->id);
+
+
+        $proyects = Proyect::all()->filter(function ($value, $key) {
+           return !$value->freelancers->contains(Auth::guard('freelancer')->user()->id) && count($value->freelancers) < $value->team_size;
+       });
+
         
         if(count($proyects) > 0)
         {
@@ -98,7 +106,7 @@ class ProyectController extends Controller
         $this->middleware('guest:company');
 
         $freelancers = [];
-        $proyects = Proyect::with('freelancers')->where('freelancer.id', Auth::guard('freelancer')->user()->id);
+        $proyects = Freelancer::Find(Auth::guard('freelancer')->user()->id)->proyects;
 
         if(count($proyects) > 0)
         {
@@ -109,6 +117,27 @@ class ProyectController extends Controller
         }
 
         return view('proyectosDeFreelancer')->with(['proyects' => $proyects, 'freelancers' => $freelancers]);
-
     }
+
+    public function UnattachProyect(Request $request){
+        $this->middleware('guest:company');
+        $data = $request->all();
+        $proyect = Proyect::Find($data['proyect_id']);
+        $proyect->freelancers()->detach($data['freelancer_id']);
+
+        $freelancers = [];
+        $proyects = Freelancer::Find(Auth::guard('freelancer')->user()->id)->proyects;
+
+        
+        if(count($proyects) > 0)
+        {
+            foreach($proyects as $proyect)
+            {
+                $freelancers[$proyect->id] = $proyect->freelancers;
+            }
+        }
+
+         return view('proyectosDeFreelancer')->with(['proyects' => $proyects, 'freelancers' => $freelancers]);
+    }
+    
 }
