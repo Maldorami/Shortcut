@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
 
-  <form class="forml-horizontal" method="post" enctype="multipart/form-data">
+  <form id="CompanyRegister" class="form-horizontal" method="post" enctype="multipart/form-data">
     {{csrf_field()}}
     <fieldset class="card">
       <div class="card-header">Página de registro para Companías</div>
@@ -46,5 +46,6 @@
       </div>
     </fieldset>
   </form>
+  <script src="js/CompanyRegisterValidation.js"></script>
 </div>
 @endsection
