@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function()
 {
 
- const  { CompanyRegister } = document.forms
+ const  { FreelancerRegister } = document.forms
 
  CompanyRegister.onsubmit = function onFormSubmit (ev)
  {
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function()
  }
 
 
-   function validateCompanyRegister() // hace un llamado a todas las validaciones
+   function validateFreelancerRegister() // hace un llamado a todas las validaciones
    {
 
     var errorAlert = document.getElementsByClassName("text-danger")
@@ -84,6 +84,15 @@ errores.push(["password_confirmation", "Las constraseñas no coinciden!"]);
 return false;
 }
 
+function validateName(first_name, errores)
+{
+  if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/.test(password))
+  {
+    return true;
+}
+errores.push(["first_name", "El nombre es incorrecto!"]);
+return false;
+}
 
 
 

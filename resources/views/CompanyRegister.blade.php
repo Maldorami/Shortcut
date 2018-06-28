@@ -11,7 +11,7 @@
       <div class="card-body">
         <div class="form-group">
           <label for="InputEmail">Email</label>
-          <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Ingrese su email" name="email" value="{{old('email')}}">
+          <input type="text" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Ingrese su email" name="email" value="{{old('email')}}">
         </div>
 
         <div class="form-group">
