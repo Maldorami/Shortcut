@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
+<script src="js/FreelancerRegisterValidation.js"></script>
 @section('content')
 <div class="container">
-
-    <form class="forml-horizontal" method="post" enctype="multipart/form-data">
+    <form id="FreelancerRegister" class="forml-horizontal" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
         <fieldset class="card">
             <div class="card-header">Página de registro para Freelancers</div>
             <div class="card-body">
             <div class="form-group">
               <label for="InputEmail">Email</label>
-              <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Ingrese su email" name="email" value="{{old('email')}}">
+              <input type="text" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Ingrese su email" name="email" value="{{old('email')}}">
           </div>
 
           <div class="form-group">

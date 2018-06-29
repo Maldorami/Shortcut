@@ -1,14 +1,17 @@
 document.addEventListener('DOMContentLoaded', function()
 {
 
- const  { FreelancerRegister } = document.forms
+ const  { FreelancerRegister }  = document.forms
 
- CompanyRegister.onsubmit = function onFormSubmit (ev)
+ FreelancerRegister.onsubmit = function onFormSubmit (ev)
  {
 
-     if(!validateCompanyRegister())
+     if(!validateFreelancerRegister())
      {
          ev.preventDefault()
+     }     
+     else{
+      FreelancerRegister.submit()
      }
 
  }
@@ -23,32 +26,23 @@ document.addEventListener('DOMContentLoaded', function()
     }
 
 
-    const{email, company_name, password, password_confirmation} = CompanyRegister.elements
+    const{email, first_name, last_name, password, password_confirmation} = FreelancerRegister.elements
     var errores = [];
 
     validateEmail(email.value, errores)
     validatePassword(password.value, errores)
     validateRepeatPassword(password_confirmation.value, password.value, errores)
+    //validateName(first_name.value, errores)
+    //validateLastName(last_name.value, errores)
 
-       //CompanyRegister.elements.email.value = errores[0][1];
-       //CompanyRegister.elements.email.style.border = "1px red solid";
-       //CompanyRegister.elements.email.style.color = "red";
+
        
        errores.forEach(function(elemento) {
          var input = document.querySelector('[name=' + elemento[0] + ']');
          input.parentElement.append(generarDivError(elemento[1]))
      });
 
-       return false;
-       /*
-
-       ------- APPEND
-       Verifican si hay errores
-       Generar un DIV de error en JS para rellenar despues
-       Rellenan el nuevo nodo
-       Usan ap<pend para cada input y su error
-
-       */
+       return errores.length > 0 ? false : true;
    }
 
 
@@ -86,11 +80,21 @@ return false;
 
 function validateName(first_name, errores)
 {
-  if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/.test(password))
+  if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/.test(first_name))
   {
     return true;
 }
-errores.push(["first_name", "El nombre es incorrecto!"]);
+errores.push(["first_name", "Por favor, ingrése un nombre correcto."]);
+return false;
+}
+
+function validateLastName(last_name, errores)
+{
+  if (/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])$/.test(last_name))
+  {
+    return true;
+}
+errores.push(["last_name", "Por favor, ingrése un apellido correcto."]);
 return false;
 }
 

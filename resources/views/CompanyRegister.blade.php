@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
+<script src="js/CompanyRegisterValidation.js"></script>
 @section('content')
 <div class="container">
-
   <form id="CompanyRegister" class="form-horizontal" method="post" enctype="multipart/form-data">
     {{csrf_field()}}
     <fieldset class="card">
@@ -46,6 +46,6 @@
       </div>
     </fieldset>
   </form>
-  <script src="js/CompanyRegisterValidation.js"></script>
 </div>
+
 @endsection

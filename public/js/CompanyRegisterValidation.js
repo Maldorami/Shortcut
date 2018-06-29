@@ -5,14 +5,14 @@ document.addEventListener('DOMContentLoaded', function()
 
  CompanyRegister.onsubmit = function onFormSubmit (ev)
  {
-
      if(!validateCompanyRegister())
      {
          ev.preventDefault()
+     } 
+     else{
+      CompanyRegister.submit()
      }
-
  }
-
 
    function validateCompanyRegister() // hace un llamado a todas las validaciones
    {
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function()
          input.parentElement.append(generarDivError(elemento[1]))
      });
 
-       return false;
+       return errores.length > 0 ? false : true;
        /*
 
        ------- APPEND

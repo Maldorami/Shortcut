@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+<script src="js/FreelancerLogInValidation.js"></script>
 @section('content')
 <div class="container">
   <div class="row justify-content-center">
@@ -8,7 +9,7 @@
         <div class="card-header">{{ __('Página de inicio de sesión para Freelancers') }}</div>
 
         <div class="card-body">
-          <form method="POST">
+          <form id="FreelancerLogin" class="forml-horizontal" method="post">
             @csrf
 
             @if(count($errors) > 0)
@@ -25,7 +26,7 @@
               <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
               <div class="col-md-6">
-                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
+                <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" autofocus>
 
                 @if ($errors->has('email'))
                 <span class="invalid-feedback">
@@ -39,7 +40,7 @@
               <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
               <div class="col-md-6">
-                <input id="password" type="password" class="form-control" name="password" required>
+                <input id="password" type="password" class="form-control" name="password">
 
                 @if ($errors->has('password'))
                 <span class="invalid-feedback">
@@ -72,4 +73,5 @@
     </div>
   </div>
 </div>
+
 @endsection
